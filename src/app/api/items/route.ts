@@ -50,3 +50,17 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function GET(req: NextRequest) {
+  try {
+    await connectToDatabase();
+    const items = await Item.find({}).sort({ name: 1 });
+    return NextResponse.json(items); // <- this is correct
+  } catch (err: any) {
+    console.error(err);
+    return NextResponse.json(
+      { ok: false, error: err.message },
+      { status: 500 }
+    );
+  }
+}
