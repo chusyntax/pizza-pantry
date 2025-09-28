@@ -50,10 +50,13 @@ export async function PATCH(
     await item.save();
 
     return NextResponse.json({ ok: true, item });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err);
     return NextResponse.json(
-      { ok: false, error: err.message || "Unknown error" },
+      {
+        ok: false,
+        error: err instanceof Error ? err.message : "Unknown error",
+      },
       { status: 400 }
     );
   }

@@ -40,10 +40,13 @@ export async function PATCH(
       );
 
     return NextResponse.json({ ok: true, item: updated });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err);
     return NextResponse.json(
-      { ok: false, error: err.message || "Unknown error" },
+      {
+        ok: false,
+        error: err instanceof Error ? err.message : "Unknown error",
+      },
       { status: 400 }
     );
   }
@@ -65,10 +68,13 @@ export async function DELETE(
     }
 
     return NextResponse.json({ ok: true, message: "Item deleted" });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err);
     return NextResponse.json(
-      { ok: false, error: err.message },
+      {
+        ok: false,
+        error: err instanceof Error ? err.message : "Unknown error",
+      },
       { status: 500 }
     );
   }
@@ -80,10 +86,13 @@ export async function GET(req: NextRequest) {
 
     const items = await Item.find({}).sort({ name: 1 });
     return NextResponse.json(items);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err);
     return NextResponse.json(
-      { ok: false, error: err.message },
+      {
+        ok: false,
+        error: err instanceof Error ? err.message : "Unknown error",
+      },
       { status: 500 }
     );
   }

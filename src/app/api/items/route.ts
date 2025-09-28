@@ -41,11 +41,14 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ ok: true, item });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err);
 
     return NextResponse.json(
-      { ok: false, error: err?.message || "Unknown error" },
+      {
+        ok: false,
+        error: err instanceof Error ? err.message : "Unknown error",
+      },
       { status: 400 }
     );
   }
@@ -56,10 +59,13 @@ export async function GET(req: NextRequest) {
     await connectToDatabase();
     const items = await Item.find({}).sort({ name: 1 });
     return NextResponse.json(items);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error(err);
     return NextResponse.json(
-      { ok: false, error: err.message },
+      {
+        ok: false,
+        error: err instanceof Error ? err.message : "Unknown error",
+      },
       { status: 500 }
     );
   }
