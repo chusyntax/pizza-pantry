@@ -1,5 +1,5 @@
 import React from "react";
-import { AuditEntry, Item } from "@/components/ItemCard";
+import { Item } from "@/components/ItemCard";
 
 interface AuditLogModalProps {
   item: Item;

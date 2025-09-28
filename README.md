@@ -187,6 +187,13 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
+## Demo
+
+To demo the app, use the following credentials to Log In:
+
+Email: radioactivep2@gmail.com
+Password: TestingDev@123.com
+
 ## 📚 Repository
 
 [https://github.com/chusyntax/pizza-pantry](https://github.com/chusyntax/pizza-pantry)

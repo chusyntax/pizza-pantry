@@ -80,8 +80,9 @@ export default function AddItemForm() {
       } else {
         setMessage("❌ Error: " + data.error);
       }
-    } catch (err: any) {
-      setMessage("❌ Validation Error: " + err.message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      setMessage("❌ Validation Error: " + message);
     } finally {
       setLoading(false);
     }
