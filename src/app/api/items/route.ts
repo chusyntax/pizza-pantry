@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
   try {
     await connectToDatabase();
     const items = await Item.find({}).sort({ name: 1 });
-    return NextResponse.json(items); // <- this is correct
+    return NextResponse.json(items);
   } catch (err: any) {
     console.error(err);
     return NextResponse.json(

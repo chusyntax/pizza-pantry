@@ -16,6 +16,12 @@ export async function PATCH(
       );
 
     const { delta } = await req.json();
+    if (typeof delta !== "number")
+      return NextResponse.json(
+        { ok: false, error: "Delta must be a number" },
+        { status: 400 }
+      );
+
     await connectToDatabase();
 
     const item = await Item.findById(params.id);
@@ -25,8 +31,22 @@ export async function PATCH(
         { status: 404 }
       );
 
+    // Update quantity
     item.quantity += delta;
     item.updatedAt = new Date();
+
+    // Ensure auditLog exists
+    if (!item.auditLog) {
+      item.auditLog = [];
+    }
+
+    // Add audit entry
+    item.auditLog.push({
+      delta,
+      userId,
+      timestamp: new Date(),
+    });
+
     await item.save();
 
     return NextResponse.json({ ok: true, item });

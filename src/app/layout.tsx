@@ -3,6 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Pizza Pantry",
@@ -17,15 +18,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="min-h-screen bg-gray-50 text-gray-900">
-          <header className="p-4 bg-red-600 text-white font-bold flex gap-6">
-            <a href="/">🍕 Pizza Pantry</a>
-            <a href="/inventory" className="hover:underline">
-              Inventory
-            </a>
-          </header>
+        <body className="min-h-screen bg-[#031635] text-gray-900">
+          <Navbar />
 
-          <main className="p-6">{children}</main>
+          <main className="p-6 bg-[#031635]">{children}</main>
 
           <ToastContainer
             position="top-right"

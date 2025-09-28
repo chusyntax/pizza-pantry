@@ -90,7 +90,7 @@ export default function AddItemForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-4 bg-white shadow rounded space-y-4"
+      className="max-w-md mx-auto p-4 bg-gray-800 shadow rounded space-y-4"
     >
       <h2 className="text-xl font-bold mb-2">Add New Item</h2>
 
